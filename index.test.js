@@ -74,5 +74,11 @@ describe('verify methods can GET, PUT, POST, DELETE', () => {
         expect(restaurants.length).toEqual(restQuantity);
         expect(restaurants[1].id).not.toEqual(1);
 })
+    test('should return error array', async () => {
+        const response = await request(app)
+        .post("/restaurants")
+        .send({name: "", location: "", cuisine: ""});
+        expect(response.body.errors.length).toBeGreaterThan(0);
+})
 
 })
